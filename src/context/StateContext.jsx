@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 
 const Context = createContext();
@@ -6,8 +7,16 @@ const Context = createContext();
 
 export const StateContext = ({ children }) => {
 
+	// ----------------------- States ------------------------
 	const [user, setUser] = useState({})
 	const [ecn, setEcn] = useState("");
+
+	// ------------------- useLocalStorage ------------------- 
+    const {
+        item: token,
+        saveItem: saveToken,
+        error,
+    } = useLocalStorage("token", "");
 
   	return (
     	<Context.Provider value={{
@@ -15,6 +24,8 @@ export const StateContext = ({ children }) => {
 			setUser,
 			ecn,
 			setEcn,
+			token,
+			saveToken,
         }}>
     	    {children}
     	</Context.Provider>

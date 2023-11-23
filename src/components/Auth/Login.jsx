@@ -6,7 +6,7 @@ import logo from '../../assets/bolumbiaCensusLogo.jpg'
 
 const Login = () => {
 
-    const { ecn, setEcn, setUser } = useStateContext();
+    const { ecn, setEcn, setUser, saveToken } = useStateContext();
     const navigate = useNavigate();
  
 
@@ -16,7 +16,7 @@ const Login = () => {
 
         const getLogin = async () => {
             const user = await login(ecn);
-            localStorage.setItem('token', user.token);
+            saveToken(user.token);
             setUser(user);  
             if(user){
                 navigate('/form');
